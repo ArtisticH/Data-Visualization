@@ -255,7 +255,7 @@ A previous challenge showed the format for how to create and append a div for ea
 </body>
   ```
   
-  ## 13. 
+  ## 13. Dynamically Set the Coordinates for Each Bar
   ```
   <body>
   <script>
