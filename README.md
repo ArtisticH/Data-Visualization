@@ -459,9 +459,417 @@ A previous challenge showed the format for how to create and append a div for ea
   
   ## 19. Add a Hover Effect to a D3 Element
   
-  
-  
-  
-  
+  ```
+  <style>
+  .bar:hover {
+    fill: brown;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
 
+    const w = 500;
+    const h = 100;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => 3 * d)
+       .attr("fill", "navy")
+       // Add your code below this line
+        .attr('class', 'bar');
+       // Add your code above this line
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (3 * d) - 3);
+
+  </script>
+</body>
+  ```
+  
+  ## 20. Add a Tooltip to a D3 Element
+```
+  <style>
+  .bar:hover {
+    fill: brown;
+  }
+</style>
+<body>
+  <script>
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    const w = 500;
+    const h = 100;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("rect")
+       .data(dataset)
+       .enter()
+       .append("rect")
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - 3 * d)
+       .attr("width", 25)
+       .attr("height", (d, i) => d * 3)
+       .attr("fill", "navy")
+       .attr("class", "bar");
+       // Add your code below this line
+    svg.selectAll("title")
+       .data(dataset)
+       .enter()
+       .append("title")
+       .text((d) => d);
+       // Add your code above this line
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) => d)
+       .attr("x", (d, i) => i * 30)
+       .attr("y", (d, i) => h - (d * 3 + 3));
+
+  </script>
+</body>
+  ```
+  
+  ## 21. Create a Scatterplot with SVG Circles
+  ## 22. Add Attributes to the Circle Elements
+  ## 23. Add Labels to Scatter Plot Circles
+ 
+  ```
+  <body>
+  <script>
+    const dataset = [
+                  [ 34,    78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,    411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,   333 ],
+                  [ 78,    320 ],
+                  [ 21,    123 ]
+                ];
+
+
+    const w = 500;
+    const h = 500;
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
+       .attr("cx", (d, i) => d[0])
+       .attr("cy", (d, i) => h - d[1])
+       .attr("r", 5);
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       // Add your code below this line
+       .attr("x", (d, i) => d[0] + 5)
+       .attr("y", (d, i) => h - d[1])
+       .text((d) => `${d[0]}, ${d[1]}`);
+       // Add your code above this line
+  </script>
+</body>
+  ```
+  
+  ## 24. Create a Linear Scale with D3
+  ```
+  <body>
+  <script>
+    // Add your code below this line
+    const scale = d3.scaleLinear(); // Create the scale here
+    const output = scale(50); // Call scale with an argument here
+    // Add your code above this line
+    d3.select("body")
+      .append("h2")
+      .text(output);
+  </script>
+</body>
+  ```
+  
+  ## 25. Set a Domain and a Range on a Scale
+  
+  ```
+  scale.domain([50, 480]);
+scale.range([10, 500]);
+scale(50)
+scale(480)
+scale(325)
+scale(750)
+d3.scaleLinear()
+  ```
+Notice that the scale uses the linear relationship between the domain and range values to figure out what the output should be for a given number. The minimum value in the domain (50) maps to the minimum value (10) in the range.
+  
+  ```
+  <body>
+  <script>
+    // Add your code below this line
+    const scale = d3.scaleLinear();
+    scale.domain([250, 500]).range([10, 150]);
+    // Add your code above this line
+    const output = scale(50);
+    d3.select("body")
+      .append("h2")
+      .text(output);
+  </script>
+</body>
+  ```
+
+## 26. Use the d3.max and d3.min Functions to Find Minimum and Maximum Values in a Dataset
+  
+  ```
+  const exampleData = [34, 234, 73, 90, 6, 52];
+d3.min(exampleData)
+d3.max(exampleData)
+  ```
+  
+  ```
+  const locationData = [[1, 7],[6, 3],[8, 3]];
+const minX = d3.min(locationData, (d) => d[0]);
+  ```
+  
+  ```
+  <body>
+  <script>
+    const positionData = [[1, 7, -4],[6, 3, 8],[2, 9, 3]]
+    // Add your code below this line
+    const output = d3.max(positionData, (d) => d[2]); // Change this line
+    // Add your code above this line
+    d3.select("body")
+      .append("h2")
+      .text(output) // 8
+  </script>
+</body>
+  ```
+  
+  ## 27. Use Dynamic Scales
+  
+  ```
+  const dataset = [
+  [ 34,    78 ],
+  [ 109,   280 ],
+  [ 310,   120 ],
+  [ 79,    411 ],
+  [ 420,   220 ],
+  [ 233,   145 ],
+  [ 333,   96 ],
+  [ 222,   333 ],
+  [ 78,    320 ],
+  [ 21,    123 ]
+];
+const w = 500;
+const h = 500;
+
+const padding = 30;
+const xScale = d3.scaleLinear()
+  .domain([0, d3.max(dataset, (d) => d[0])])
+  .range([padding, w - padding]);
+  ```
+  
+  In the example, the domain goes from 0 to the maximum in the set. 
+  It uses the max() method with a callback function based on the x values in the arrays. 
+  The range uses the SVG's width (w), but it includes some padding, too. 
+  This puts space between the scatter plot dots and the edge of the SVG. 
+  The padding may be confusing at first. 
+  Picture the x-axis as a horizontal line from 0 to 500 (the width value for the SVG). 
+  Including the padding in the range() method forces the plot to start at 30 along that line (instead of 0), and end at 470 (instead of 500).
+  
+  ```
+  <body>
+  <script>
+    const dataset = [
+                  [ 34,    78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,    411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,   333 ],
+                  [ 78,    320 ],
+                  [ 21,    123 ]
+                ];
+
+    const w = 500;
+    const h = 500;
+
+    // Padding between the SVG boundary and the plot
+    const padding = 30;
+
+    // Create an x and y scale
+    const xScale = d3.scaleLinear()
+                    .domain([0, d3.max(dataset, (d) => d[0])])
+                    .range([padding, w - padding]);
+
+    // Add your code below this line
+     const yScale = d3.scaleLinear()
+                    .domain([0, d3.max(dataset, (d) => d[1])])
+                    .range([h - padding, padding]);
+    // Add your code above this line
+    const output = yScale(411); // Returns 30
+    d3.select("body")
+      .append("h2")
+      .text(output)
+  </script>
+</body>
+  ```
+  
+  ## 28. Use a Pre-Defined Scale to Place Elements
+  
+  ```
+  <body>
+  <script>
+    const dataset = [
+                  [ 34,     78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,   411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,    333 ],
+                  [ 78,    320 ],
+                  [ 21,   123 ]
+                ];
+
+    const w = 500;
+    const h = 500;
+    const padding = 60;
+
+    const xScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[0])])
+                     .range([padding, w - padding]);
+
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[1])])
+                     .range([h - padding, padding]);
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
+       // Add your code below this line
+        .attr('cx', (d) => xScale(d[0]))
+        .attr('cy', (d) => yScale(d[1]))
+        .attr('r', 5)
+       // Add your code above this line
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) =>  (d[0] + ", "
+ + d[1]))
+       // Add your code below this line
+      .attr('x', (d) => xScale(d[0] + 10))
+      .attr('y', (d) => yScale(d[1]))
+       // Add your code above this line
+  </script>
+</body>
+  ```
+  
+  ## 29. Add Axes to a Visualization
+  
+  ```
+  <body>
+  <script>
+    const dataset = [
+                  [ 34,     78 ],
+                  [ 109,   280 ],
+                  [ 310,   120 ],
+                  [ 79,   411 ],
+                  [ 420,   220 ],
+                  [ 233,   145 ],
+                  [ 333,   96 ],
+                  [ 222,    333 ],
+                  [ 78,    320 ],
+                  [ 21,   123 ]
+                ];
+
+    const w = 500;
+    const h = 500;
+    const padding = 60;
+
+    const xScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[0])])
+                     .range([padding, w - padding]);
+
+    const yScale = d3.scaleLinear()
+                     .domain([0, d3.max(dataset, (d) => d[1])])
+                     .range([h - padding, padding]);
+
+    const svg = d3.select("body")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+    svg.selectAll("circle")
+       .data(dataset)
+       .enter()
+       .append("circle")
+       .attr("cx", (d) => xScale(d[0]))
+       .attr("cy",(d) => yScale(d[1]))
+       .attr("r", (d) => 5);
+
+    svg.selectAll("text")
+       .data(dataset)
+       .enter()
+       .append("text")
+       .text((d) =>  (d[0] + "," + d[1]))
+       .attr("x", (d) => xScale(d[0] + 10))
+       .attr("y", (d) => yScale(d[1]))
+
+    const xAxis = d3.axisBottom(xScale);
+    // Add your code below this line
+    const yAxis = d3.axisLeft(yScale);
+    // Add your code above this line
+
+    svg.append("g")
+       .attr("transform", "translate(0," + (h - padding) + ")")
+       .call(xAxis);
+    // Add your code below this line
+   svg.append("g")
+       .attr("transform", "translate(" + padding + ", 0)")
+       .call(yAxis);
+    // Add your code above this line
+
+  </script>
+</body>
+  ```
+  
+  
 
